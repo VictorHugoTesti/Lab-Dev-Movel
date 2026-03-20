@@ -17,6 +17,10 @@ class ServicoRepository {
     _servicos.removeWhere((s) => s.id == id);
   }
 
-
+void update(Servico servico) {
+  //Atributo index procura na lista se existe o usuário
+  final index = _servicos.indexWhere((s) => s.id == servico.id);
+  if(index != -1) _servicos[index] = servico;
+}
 
 }
