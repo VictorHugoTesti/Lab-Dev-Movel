@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class TelaResumo extends StatelessWidget {
   final String item;
   final int qttd;
-  const TelaResumo({super.key, required this.item, required this.qttd});
+  final double valorTotal 
+
+  const TelaResumo({super.key, required this.item, required this.qttd, required this.valorTotal});
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +29,14 @@ class TelaResumo extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text('Quantidade: $qttd', style: const TextStyle(fontSize: 18)),
+              const SizedBox(height: 8),
+              Text(
+                'Total: R\$ ${valorTotal.toStringAsFixed(2).replaceAll('.', ',')}', 
+                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.indigo),
+              ),
               const SizedBox(height: 32),
               ElevatedButton.icon(
                 onPressed: () {
-                  // -----------------
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.arrow_back),
