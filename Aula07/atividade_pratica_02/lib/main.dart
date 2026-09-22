@@ -12,7 +12,7 @@ class MeuApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Aula 7 - Navegação',
+      title: 'Aula 07 - Atividade Pratica 02',
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
@@ -37,6 +37,7 @@ class _TelaContadorState extends State<TelaContador> {
   void _incrementar() {
     setState(() {
       _quantidade++;
+      print('Quantidade atual: $_quantidade');
     });
   }
 
@@ -44,6 +45,7 @@ class _TelaContadorState extends State<TelaContador> {
     if (_quantidade > 1) {
       setState(() {
         _quantidade--;
+        print('Quantidade atual: $_quantidade');
       });
     }
   }
@@ -51,6 +53,7 @@ class _TelaContadorState extends State<TelaContador> {
   void _resetar() {
     setState(() {
       _quantidade = 1;
+      print('Qttd Resetada!');
     });
   }
 
