@@ -102,15 +102,30 @@ class _TelaContadorState extends State<TelaContador> {
               ),
               const SizedBox(height: 40),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   double valorCalculado = _quantidade * _precoUnitario;
-                  Navigator.push(
+                  final confirmou = await Navigator.push<bool>(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          TelaResumo(item: _nomeProduto, qttd: _quantidade, valorTotal: valorCalculado),
+                      builder: (context) => TelaResumo(
+                        item: _nomeProduto,
+                        qttd: _quantidade,
+                        valorTotal: valorCalculado,
+                      ),
                     ),
                   );
+                  if (!context.mounted) return;
+                  if (confirmou == true) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Pedido confirmado com sucesso!'),
+                        backgroundColor: Colors.green,
+                        behavior: SnackBarBehavior.floating,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                    _resetar();
+                  }
                 },
                 child: const Text('Avançar'),
               ),
