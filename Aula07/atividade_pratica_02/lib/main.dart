@@ -47,6 +47,12 @@ class _TelaContadorState extends State<TelaContador> {
     }
   }
 
+  void _resetar() {
+    setState(() {
+      _quantidade = 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,10 +94,14 @@ class _TelaContadorState extends State<TelaContador> {
                   ),
                 ],
               ),
+              const SizedBox(height: 24),
+              OutlinedButton(
+                onPressed: _resetar,
+                child: const Text('Resetar qttd'),
+              ),
               const SizedBox(height: 40),
               ElevatedButton(
                 onPressed: () {
-                  // Empilha a TelaResumo passando os dados do estado
                   Navigator.push(
                     context,
                     MaterialPageRoute(
