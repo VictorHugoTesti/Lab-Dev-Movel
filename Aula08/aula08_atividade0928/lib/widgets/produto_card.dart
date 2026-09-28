@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../models/produto.dart';
 
 class ProdutoCard extends StatelessWidget {
   final Produto produto;
   final VoidCallback? onTap;
-
   const ProdutoCard({super.key, required this.produto, this.onTap});
 
   @override
