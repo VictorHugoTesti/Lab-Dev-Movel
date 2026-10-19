@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/noticia_model.dart';
 import '../services/noticia_service.dart';
 import 'detalhe_noticia_screen.dart';
@@ -23,13 +24,19 @@ class _FeedNoticiasScreenState extends State<FeedNoticiasScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Portal de Notícias'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('Portal de Notícias'),
+        centerTitle: true,
+      ),
       body: FutureBuilder<List<NoticiaModel>>(
         future: _futureNoticias,
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
-          if (snapshot.hasError) return Center(child: Text('Erro: ${snapshot.error}'));
-          if (!snapshot.hasData || snapshot.data!.isEmpty) return const Center(child: Text('Nenhuma notícia.'));
+          if (snapshot.connectionState == ConnectionState.waiting)
+            return const Center(child: CircularProgressIndicator());
+          if (snapshot.hasError)
+            return Center(child: Text('Erro: ${snapshot.error}'));
+          if (!snapshot.hasData || snapshot.data!.isEmpty)
+            return const Center(child: Text('Nenhuma notícia.'));
 
           final noticias = snapshot.data!;
           return ListView.builder(
@@ -39,14 +46,35 @@ class _FeedNoticiasScreenState extends State<FeedNoticiasScreen> {
               return Card(
                 margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 child: ListTile(
-                  title: Text(item.titulo, maxLines: 1, overflow: TextOverflow.ellipsis),
+                  leading: Hero(
+                    tag: 'imagem_${item.id}',
+                    child: Image.network(
+                      item.urlImagem,
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  title: Text(
+                    item.titulo,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   subtitle: Text(item.resumo),
                   trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                  onTap: () {
-                    Navigator.push(
+                  onTap: () async {
+                    final favoritou = await Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DetalheNoticiaScreen(noticia: item)),
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            DetalheNoticiaScreen(noticia: item),
+                      ),
                     );
+                    if (favoritou == true && context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Notícia favoritada!')),
+                      );
+                    }
                   },
                 ),
               );
