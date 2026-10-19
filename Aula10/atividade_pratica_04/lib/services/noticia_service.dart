@@ -5,10 +5,13 @@ import '../models/noticia_model.dart';
 class NoticiaService {
   // Utilizando o JSONPlaceholder para a prática funcionar
   static const String _endpoint = 'https://jsonplaceholder.typicode.com/posts';
+  
 
-  Future<List<NoticiaModel>> buscarNoticias() async {
+  Future<List<NoticiaModel>> buscarNoticias({bool forcarErro = false}) async {
+    final url = forcarErro ? 'https://jsonplaceholder.typicode.com/postzzzz' : _endpoint;
+    
     try {
-      final response = await http.get(Uri.parse(_endpoint));
+      final response = await http.get(Uri.parse(url));
       
       if (response.statusCode == 200) {
         final List<dynamic> listaJson = jsonDecode(response.body);
