@@ -3,7 +3,7 @@ class TarefaModel {
   final String titulo;
   final String descricao;
   final bool concluida;
-  final String categoria; // Adicionado para o Desafio Intermediário
+  final String categoria;
 
   TarefaModel({
     this.id,

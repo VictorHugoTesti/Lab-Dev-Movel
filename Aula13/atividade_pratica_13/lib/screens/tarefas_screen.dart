@@ -1,4 +1,3 @@
-// lib/screens/tarefas_screen.dart
 import 'package:flutter/material.dart';
 import '../database/database_helper.dart';
 import '../models/tarefa_model.dart';
@@ -15,7 +14,6 @@ class _TarefasScreenState extends State<TarefasScreen> {
   List<TarefaModel> _tarefas = [];
   bool _carregando = true;
   
-  // Estados para os desafios
   String _termoBusca = '';
   String _categoriaSelecionada = 'Todas';
   final List<String> _categorias = ['Todas', 'Geral', 'Trabalho', 'Estudos'];
@@ -98,7 +96,6 @@ class _TarefasScreenState extends State<TarefasScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Cálculo para o Desafio Básico
     final totalConcluidas = _tarefas.where((t) => t.concluida).length;
 
     return Scaffold(

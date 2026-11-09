@@ -17,7 +17,6 @@ class DatabaseHelper {
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
-    // Em caso de erro de coluna inexistente durante testes, desinstale o app no emulador ou incremente a version.
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
@@ -38,7 +37,6 @@ class DatabaseHelper {
     return await db.insert('tarefas', tarefa.toMap());
   }
 
-  // Atualizado para o Desafio Avançado (Busca LIKE) e Intermediário (Filtro)
   Future<List<TarefaModel>> listarTarefas({String termoBusca = '', String categoria = 'Todas'}) async {
     final db = await instance.database;
     

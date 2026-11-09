@@ -1,8 +1,8 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
 import 'screens/tarefas_screen.dart';
 
 void main() => runApp(const MeuApp());
+
 
 class MeuApp extends StatelessWidget {
   const MeuApp({super.key});
